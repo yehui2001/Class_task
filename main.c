@@ -35,15 +35,35 @@ void read(node_pointer header){
     node_pointer p = header;
     while(p->Rp != NULL){
         putchar(p->text);
-        printf("\n");
+        //printf("\n");
         p = p->Rp;
     }
+    printf("\n");
+}
+
+void insert(node_pointer header, char target, char insert_value){
+    node_pointer p;
+    p =  header;
+    node_pointer insert_cell = (node_pointer)malloc(sizeof(node_pointer));
+    insert_cell->text = insert_value;
+    while(p->text != target)
+    {
+        p = p->Rp; 
+    }
+    insert_cell->Rp = p->Rp;
+    p->Rp = insert_cell;
+
 }
 
 int main()
 {
+    char target,insert_value;
+    target = 'b';
+    insert_value = 'k';
     node_pointer header;
     header = create();
+    read(header);
+    insert(header, target, insert_value);
     read(header);    
     return 0;
 }
