@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 #define iter 26
 
 typedef struct node *node_pointer;
@@ -53,17 +52,18 @@ void insert(node_pointer header, char target, char insert_value){
     /*做一个单独的查找函数！*/
     insert_cell->Rp = p->Rp;
     p->Rp = insert_cell;
-
 }
 
 int main()
 {
     char target,insert_value;
     target = 'b';
-    insert_value = 'k';
+    insert_value = 'Z';
     node_pointer header;
     header = create();
     read(header);
+    insert(header, target, insert_value);
+    insert(header, target, insert_value);
     insert(header, target, insert_value);
     read(header);    
     return 0;
