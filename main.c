@@ -50,6 +50,7 @@ void insert(node_pointer header, char target, char insert_value){
     {
         p = p->Rp; 
     }
+    /*做一个单独的查找函数！*/
     insert_cell->Rp = p->Rp;
     p->Rp = insert_cell;
 
