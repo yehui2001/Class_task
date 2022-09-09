@@ -60,7 +60,7 @@ int main()
 {
     char target,insert_value;
     target = 'b';
-    insert_value = 'X';
+    insert_value = 'Z';
     node_pointer header;
     header = create();
     read(header);
