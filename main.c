@@ -23,7 +23,7 @@ node_pointer create(){
     q->Rp = NULL;
     for(i = 0; i < iter; i++){
         p = (node_pointer)malloc(sizeof(node_pointer));
-        p->text = text++;
+        p->text = ++text;
         p->Rp = NULL;
         q->Rp = p;
         q = p;
