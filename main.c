@@ -60,10 +60,12 @@ int main()
 {
     char target,insert_value;
     target = 'b';
-    insert_value = 'k';
+    insert_value = 'X';
     node_pointer header;
     header = create();
     read(header);
+    insert(header, target, insert_value);
+    insert(header, target, insert_value);
     insert(header, target, insert_value);
     read(header);    
     return 0;
