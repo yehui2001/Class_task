@@ -19,13 +19,11 @@ typedef struct SeqList
     /* data */
 } *SeqList;
 
-
-SeqList SeqListinput(int m){
+SeqList SeqList_Create(int m){
     SeqList p;
     char text = 'a';
     p = (SeqList)malloc(sizeof(SeqList));
     p->element = (char*)malloc(sizeof(char) * m);
-    //L.element=(char*)malloc(sizeof(char) * m);
     for(int j = 0; j <= m ; j++)
     {
         p->length = j;
@@ -34,10 +32,12 @@ SeqList SeqListinput(int m){
     return p;
 }
 
-void SeqListDestory(SeqList L){
-        //printf("%s",*(L.element));
+void SeqList_Read(SeqList L){
+    SeqList list = L;
+    for(int i = 0; i < list->length; i++){
+    printf("%c",list->element[i]);
+    }
 }
-
 
 node_pointer create(){
     int i;
@@ -101,8 +101,7 @@ int main()
 {
     char flag;
     printf("Input Flag:");
-    //flag = getchar();
-    flag = 'b';
+    flag = getchar();
     switch(flag){
         case 'a':{
             printf("Use Method Link List\n");
@@ -123,12 +122,8 @@ int main()
         case 'b':{
             printf("Use Method Traditional List\n");
             //SeqList L;
-            SeqList list = SeqListinput(26);
-            for(int i = 0; i < list->length; i++){
-                printf("%c",list->element[i]);
-            }
-            //SeqListDestory(L);
-            //printf("%s",*L.element);
+            SeqList list = SeqList_Create(26);
+            SeqList_Read(list);
             break;
         }
         default:{
