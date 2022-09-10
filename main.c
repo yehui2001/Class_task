@@ -3,7 +3,7 @@
 
 #define iter 26
 
-typedef struct node *node_pointer;
+typedef struct node *node_pointer; 
 
 struct node
 {
@@ -41,26 +41,31 @@ void read(node_pointer header){
     printf("\n");
 }
 
-void insert(node_pointer header, char target, char insert_value){
+node_pointer find_pointer(node_pointer header, char target){
     node_pointer p;
-    p =  header;
-    node_pointer insert_cell = (node_pointer)malloc(sizeof(node_pointer));
-    insert_cell->text = insert_value;
+    p = header;
     while(p->text != target)
     {
         p = p->Rp; 
     }
-    /*做一个单独的查找函数！*/
+    return p;
+}
+
+void insert(node_pointer header, char target, char insert_value){
+    node_pointer p;
+    p =  header;
+    node_pointer insert_cell = (node_pointer)malloc(sizeof(node_pointer));
+    insert_cell->text = insert_value; 
+    p = find_pointer(p, target);
     insert_cell->Rp = p->Rp;
     p->Rp = insert_cell;
-
 }
 
 int main()
 {
     char target,insert_value;
     target = 'b';
-    insert_value = 'k';
+    insert_value = 'o';
     node_pointer header;
     header = create();
     read(header);
