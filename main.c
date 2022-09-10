@@ -12,6 +12,30 @@ struct node
     /* data */
 };
 
+typedef struct SeqList
+{
+    int  length;    //已存储
+    char *element;  //首地址
+    /* data */
+}SeqList;
+
+
+void SeqListinput(int m){
+    SeqList L;
+    char text = 'a';
+    L.element=(char*)malloc(sizeof(char) * m);
+    for(int j = 0; j < m ; j++)
+    {
+        
+        L.length = ++j;
+        L.element[j] = text + j;
+    }
+}
+
+void SeqListDestory(SeqList L){
+        //printf("%s",*(L.element));
+}
+
 
 node_pointer create(){
     int i;
@@ -95,6 +119,10 @@ int main()
         }   
         case 'b':{
             printf("Use Method Traditional List\n");
+            SeqList L;
+            SeqListinput(26);
+            SeqListDestory(L);
+            printf("%s",*L.element);
             break;
         }
         default:{
