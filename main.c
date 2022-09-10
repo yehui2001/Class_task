@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 #define iter 26
 
 typedef struct node *node_pointer; 
@@ -69,6 +68,8 @@ int main()
     node_pointer header;
     header = create();
     read(header);
+    insert(header, target, insert_value);
+    insert(header, target, insert_value);
     insert(header, target, insert_value);
     read(header);    
     return 0;
