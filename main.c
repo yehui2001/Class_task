@@ -30,8 +30,7 @@ node_pointer create(){
     return header;
 }
 
-void read(node_pointer header){
-    node_pointer p = header;
+void read(node_pointer p){
     while(p->Rp != NULL){
         putchar(p->text);
         //printf("\n");
@@ -40,22 +39,28 @@ void read(node_pointer header){
     printf("\n");
 }
 
-node_pointer find_pointer(node_pointer header, char target){
-    node_pointer p;
-    p = header;
-    while(p->text != target)
-    {
-        p = p->Rp; 
+/* flag:-1 表示查找前驱节点，0 表示查找当前节点，1 表示查找后继节点*/
+node_pointer find_pointer(node_pointer p, char target,int flag){ 
+switch(flag){
+    case -1:    while(p->Rp->text != target){p = p->Rp; };break;
+
+    case 0:     while(p->text != target){p = p->Rp; };break;
+
+    case 1:     while(p->text != target){p = p->Rp->Rp; };break;
     }
     return p;
 }
 
-void insert(node_pointer header, char target, char insert_value){
-    node_pointer p;
-    p =  header;
+void delete_cell(node_pointer p, char target){
+    node_pointer target_cell = find_pointer(p, target, -1);
+    target_cell->Rp = target_cell->Rp->Rp;
+    //free(target_cell);
+}
+
+void insert(node_pointer p, char target, char insert_value){
     node_pointer insert_cell = (node_pointer)malloc(sizeof(node_pointer));
     insert_cell->text = insert_value; 
-    p = find_pointer(p, target);
+    p = find_pointer(p, target, 0);
     insert_cell->Rp = p->Rp;
     p->Rp = insert_cell;
 }
@@ -69,8 +74,10 @@ int main()
     header = create();
     read(header);
     insert(header, target, insert_value);
-    insert(header, target, insert_value);
-    insert(header, target, insert_value);
-    read(header);    
+    delete_cell(header,'x');
+    delete_cell(header,'z');
+    read(header);
+    //getchar();
+    //system("pause");
     return 0;
 }
