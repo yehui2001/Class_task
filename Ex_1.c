@@ -29,12 +29,27 @@ void SeqList_Read(SeqList L){
     }
 }
 
+void SeqList_Transform(SeqList L){
+    char q;
+    SeqList list = L;
+    printf("\n逆置后的顺序:");
+    int i = 0;
+    while(i <list->length-1-i)
+    {
+        q = list->element[i];
+        list->element[i] = list->element[(list->length-1-i)];
+        list->element[(list->length-1-i)] = q;
+        i++;
+
+    list->length = 10;
+    } 
+}
 
 int main(){
     SeqList list = SeqList_Create(n);
     SeqList_Read(list);
-    //SeqList_Transform(list);
+    SeqList_Transform(list);
     printf("\n");
-    //SeqList_Read(list);
+    SeqList_Read(list);
     return 0;
 }
