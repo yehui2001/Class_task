@@ -12,6 +12,31 @@ struct node
     /* data */
 };
 
+typedef struct SeqList
+{
+    int  length;    //已存储
+    char *element;  //首地址
+    /* data */
+}SeqList;
+
+
+void SeqListinput(int m){
+    SeqList L;
+    char text = 'a';
+    L.element=(char*)malloc(sizeof(char) * m);
+    for(int j = 0; j < m ; j++)
+    {
+        
+        L.length = ++j;
+        L.element[j] = text + j;
+    }
+}
+
+void SeqListDestory(SeqList L){
+        //printf("%s",*(L.element));
+}
+
+
 node_pointer create(){
     int i;
     char text = 'a';
@@ -64,20 +89,45 @@ void insert(node_pointer p, char target, char insert_value){
     insert_cell->Rp = p->Rp;
     p->Rp = insert_cell;
 }
+ 
+void update(node_pointer p, char target, char update_value){
+    node_pointer update_cell = find_pointer(p, target, 0);
+    update_cell->text = update_value;
+}
 
 int main()
 {
-    char target,insert_value;
-    target = 'b';
-    insert_value = 'o';
-    node_pointer header;
-    header = create();
-    read(header);
-    insert(header, target, insert_value);
-    delete_cell(header,'x');
-    delete_cell(header,'z');
-    read(header);
-    //getchar();
-    //system("pause");
+    char flag;
+    printf("Input Flag:");
+    flag = getchar();
+    switch(flag){
+        case 'a':{
+            printf("Use Method Link List\n");
+            char target,insert_value;
+            target = 'b';
+            insert_value = 'o';
+            node_pointer header;
+            header = create();
+            read(header);
+            insert(header, target, insert_value);
+            update(header, 'x', 'a');
+            delete_cell(header,'z');
+            read(header);
+            //getchar();
+            //system("pause");
+            break;
+        }   
+        case 'b':{
+            printf("Use Method Traditional List\n");
+            SeqList L;
+            SeqListinput(26);
+            SeqListDestory(L);
+            printf("%s",*L.element);
+            break;
+        }
+        default:{
+            printf("Thank you");
+        }    
+    }
     return 0;
 }
