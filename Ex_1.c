@@ -19,20 +19,22 @@ SeqList SeqList_Create(int m){
         p->length = j;
         p->element[j] = text++;
     }
+    return p;
 }
 
 void SeqList_Read(SeqList L){
     SeqList list = L;
     for(int i = 0; i < list->length; i++){
-    printf("%c",list->element[i]);
+        printf("%c",list->element[i]);
     }
 }
 
 
-void main(){
+int main(){
     SeqList list = SeqList_Create(n);
     SeqList_Read(list);
     //SeqList_Transform(list);
     printf("\n");
     //SeqList_Read(list);
+    return 0;
 }
