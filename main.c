@@ -67,17 +67,33 @@ void insert(node_pointer p, char target, char insert_value){
 
 int main()
 {
-    char target,insert_value;
-    target = 'b';
-    insert_value = 'o';
-    node_pointer header;
-    header = create();
-    read(header);
-    insert(header, target, insert_value);
-    delete_cell(header,'x');
-    delete_cell(header,'z');
-    read(header);
-    //getchar();
-    //system("pause");
+    char flag;
+    printf("Input Flag:");
+    flag = getchar();
+    switch(flag){
+        case 'a':{
+            printf("Use Method Link List\n");
+            char target,insert_value;
+            target = 'b';
+            insert_value = 'o';
+            node_pointer header;
+            header = create();
+            read(header);
+            insert(header, target, insert_value);
+            delete_cell(header,'x');
+            delete_cell(header,'z');
+            read(header);
+            //getchar();
+            //system("pause");
+            break;
+        }   
+        case 'b':{
+            printf("Use Method Traditional List\n");
+            break;
+        }
+        default:{
+            printf("Thank you");
+        }    
+    }
     return 0;
 }
