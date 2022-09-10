@@ -12,6 +12,7 @@ struct node
     /* data */
 };
 
+
 node_pointer create(){
     int i;
     char text = 'a';
@@ -64,6 +65,11 @@ void insert(node_pointer p, char target, char insert_value){
     insert_cell->Rp = p->Rp;
     p->Rp = insert_cell;
 }
+ 
+void update(node_pointer p, char target, char update_value){
+    node_pointer update_cell = find_pointer(p, target, 0);
+    update_cell->text = update_value;
+}
 
 int main()
 {
@@ -80,7 +86,7 @@ int main()
             header = create();
             read(header);
             insert(header, target, insert_value);
-            delete_cell(header,'x');
+            update(header, 'x', 'a');
             delete_cell(header,'z');
             read(header);
             //getchar();
