@@ -40,8 +40,6 @@ void SeqList_Transform(SeqList L){
         list->element[i] = list->element[(list->length-1-i)];
         list->element[(list->length-1-i)] = q;
         i++;
-
-    list->length = 10;
     } 
 }
 
