@@ -15,21 +15,23 @@ struct node
 typedef struct SeqList
 {
     int  length;    //已存储
-    char *element;  //首地址
+    char *element;  //地址
     /* data */
-}SeqList;
+} *SeqList;
 
 
-void SeqListinput(int m){
-    SeqList L;
+SeqList SeqListinput(int m){
+    SeqList p;
     char text = 'a';
-    L.element=(char*)malloc(sizeof(char) * m);
-    for(int j = 0; j < m ; j++)
+    p = (SeqList)malloc(sizeof(SeqList));
+    p->element = (char*)malloc(sizeof(char) * m);
+    //L.element=(char*)malloc(sizeof(char) * m);
+    for(int j = 0; j <= m ; j++)
     {
-        
-        L.length = ++j;
-        L.element[j] = text + j;
+        p->length = j;
+        p->element[j] = text++;
     }
+    return p;
 }
 
 void SeqListDestory(SeqList L){
@@ -99,7 +101,8 @@ int main()
 {
     char flag;
     printf("Input Flag:");
-    flag = getchar();
+    //flag = getchar();
+    flag = 'b';
     switch(flag){
         case 'a':{
             printf("Use Method Link List\n");
@@ -119,10 +122,13 @@ int main()
         }   
         case 'b':{
             printf("Use Method Traditional List\n");
-            SeqList L;
-            SeqListinput(26);
-            SeqListDestory(L);
-            printf("%s",*L.element);
+            //SeqList L;
+            SeqList list = SeqListinput(26);
+            for(int i = 0; i < list->length; i++){
+                printf("%c",list->element[i]);
+            }
+            //SeqListDestory(L);
+            //printf("%s",*L.element);
             break;
         }
         default:{
