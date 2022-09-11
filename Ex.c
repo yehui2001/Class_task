@@ -57,7 +57,7 @@ node_pointer node_delete(node_pointer p,int j,int k){
     node_pointer r;
     node_pointer q;
     // find the position of i+1
-    for(int i = 0; i < j-1; i++)
+    for(int i = 0; i < j; i++)
     {
         r = p;
         p = p->Rp;
@@ -152,10 +152,10 @@ int main(){
         node_pointer p;
         node_pointer list3 = node_create(n);
         node_read(list3);
-        node_delete(list3,6,2);
+        node_delete(list3,1,3);// From the first node delete to  the third node.
         node_read(list3);
     }
-    default:
+    case '4':
         break;
     }
     
