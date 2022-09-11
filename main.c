@@ -2,15 +2,13 @@
 #include <stdlib.h>
 #define iter 26
 
-typedef struct node *node_pointer; 
-
-struct node
+typedef struct node
 {
     char text;
     //node_pointer Lp;
     node_pointer Rp;
     /* data */
-};
+}*node_pointer;
 
 typedef struct SeqList
 {
