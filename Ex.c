@@ -2,8 +2,9 @@
 #include <stdlib.h>
 #define n 10
 #define flag '2'
+#define iter 26
 
-
+//Define Sequence_List struct
 typedef struct SeqList_struct
 {
     int  length;    //已存储
@@ -11,6 +12,45 @@ typedef struct SeqList_struct
     /* data */
 } *SeqList;
 
+//Define Linked_list struct
+typedef struct node
+{
+    char text;
+    //node_pointer Lp;
+    node_pointer Rp;
+    /* data */
+}*node_pointer;
+
+//Linked_list initialization
+node_pointer create(){
+    int i;
+    char text = 'a';
+    node_pointer header,p,q;
+    header = (node_pointer)malloc(sizeof(node_pointer));
+    q = header;
+    q->text = text;
+    q->Rp = NULL;
+    for(i = 0; i < iter; i++){
+        p = (node_pointer)malloc(sizeof(node_pointer));
+        p->text = ++text;
+        p->Rp = NULL;
+        q->Rp = p;
+        q = p;
+    }
+    return header;
+}
+
+// Read Linked_list
+void read(node_pointer p){
+    while(p->Rp != NULL){
+        putchar(p->text);
+        //printf("\n");
+        p = p->Rp;
+    }
+    printf("\n");
+}
+
+// SeqList_Create initialization
 SeqList SeqList_Create(int m){
     SeqList p;
     char text = 'a';
@@ -25,6 +65,7 @@ SeqList SeqList_Create(int m){
     return p;
 }
 
+// Read SeqList
 void SeqList_Read(SeqList L){
     SeqList list = L;
     for(int i = 0; i < list->length; i++){
@@ -32,6 +73,7 @@ void SeqList_Read(SeqList L){
     }
 }
 
+// SeqList_Inversion
 void SeqList_Transform(SeqList L){
     char q;
     SeqList list = L;
@@ -46,6 +88,7 @@ void SeqList_Transform(SeqList L){
     } 
 }
 
+// Find and delete the all x in the SeqList
 void SeqList_Delete(SeqList list,char x){ //查找所有等于x的值并删除
     for(int i = 0; i < n; i++){
         if(list->element[i] == x)
@@ -63,7 +106,7 @@ void SeqList_Delete(SeqList list,char x){ //查找所有等于x的值并删除
 
 int main(){
     switch (flag)
-    {
+    {//case '1'  '2'  represent the 
     case '1':{
         SeqList list = SeqList_Create(n);
         SeqList_Read(list);
@@ -84,8 +127,15 @@ int main(){
 
     case '3':{
         SeqList list3 = SeqList_Create(n);
-    }
 
+
+
+
+
+
+
+
+    }
     default:
         break;
     }
