@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#define flag '3'
 #define n 10
-#define flag '2'
 #define iter 26
+
+typedef struct node *node_pointer;
 
 //Define Sequence_List struct
 typedef struct SeqList_struct
@@ -13,26 +15,26 @@ typedef struct SeqList_struct
 } *SeqList;
 
 //Define Linked_list struct
-typedef struct node
+struct node
 {
     char text;
     //node_pointer Lp;
     node_pointer Rp;
     /* data */
-}*node_pointer;
+};
 
 //Linked_list initialization
-node_pointer create(){
+node_pointer node_create(){
     int i;
     char text = 'a';
     node_pointer header,p,q;
     header = (node_pointer)malloc(sizeof(node_pointer));
     q = header;
-    q->text = text;
+    //q->text = text; 
     q->Rp = NULL;
-    for(i = 0; i < iter; i++){
+    for(i = 0; i <=iter; i++){
         p = (node_pointer)malloc(sizeof(node_pointer));
-        p->text = ++text;
+        p->text = text++;
         p->Rp = NULL;
         q->Rp = p;
         q = p;
@@ -41,13 +43,34 @@ node_pointer create(){
 }
 
 // Read Linked_list
-void read(node_pointer p){
+void node_read(node_pointer p){
     while(p->Rp != NULL){
         putchar(p->text);
         //printf("\n");
         p = p->Rp;
     }
     printf("\n");
+}
+
+node_pointer node_delete(node_pointer p,int j,int k){
+    int l = 1;
+    node_pointer r;
+    node_pointer q;
+    // find the position of i+1
+    for(int i = 0; i < j; i++)
+    {
+        r = p;
+        p = p->Rp;
+    }
+    printf("%c",r->text);
+    //通过指向开始删除的节点的指针，删除从开始删除位置到最后删除位置的所有节点，并找到指向最后要删除节点的后驱节点的指针
+    for(int l = 0; l < k; l++)
+    {
+        q = p;
+        p = p->Rp;
+        //free(q);
+    }  
+    r->Rp = p;
 }
 
 // SeqList_Create initialization
@@ -126,17 +149,13 @@ int main(){
     }
 
     case '3':{
-        SeqList list3 = SeqList_Create(n);
-
-
-
-
-
-
-
-
+        node_pointer p;
+        node_pointer list3 = node_create(n);
+        node_read(list3);
+        node_delete(list3,1,3);// From the first node delete to  the third node.
+        node_read(list3);
     }
-    default:
+    case '4':
         break;
     }
     
