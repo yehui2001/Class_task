@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define flag '3'
 #define n 10
 #define iter 26
 
@@ -30,17 +29,37 @@ node_pointer node_create(){
     node_pointer header,p,q;
     header = (node_pointer)malloc(sizeof(node_pointer));
     q = header;
-    //q->text = text; 
+    //q->text = text; //无头节点需要注释此处
     q->Rp = NULL;
     for(i = 0; i <=iter; i++){
         p = (node_pointer)malloc(sizeof(node_pointer));
-        p->text = text++;
+        if(i%3 ==0){text++;}
+        p->text = text;
         p->Rp = NULL;
         q->Rp = p;
         q = p;
     }
     return header;
 }
+
+node_pointer node_generator(int length, char word[]){
+    char *word_pointer = word;
+    node_pointer header,p,q;
+    header = (node_pointer)malloc(sizeof(node_pointer));
+    q = header;
+    //q->text = text; //无头节点需要注释此处
+    q->Rp = NULL;
+    for(int i = 0; i <=length; i++){
+        p = (node_pointer)malloc(sizeof(node_pointer));
+        //if(i%3 ==0){text++;}
+        p->text = *word++;
+        p->Rp = NULL;
+        q->Rp = p;
+        q = p;
+    }
+    return header;
+}
+
 
 // Read Linked_list
 void node_read(node_pointer p){
@@ -49,10 +68,12 @@ void node_read(node_pointer p){
         //printf("\n");
         p = p->Rp;
     }
+    putchar(p->text);//打印末节点的text
     printf("\n");
 }
 
-node_pointer node_delete(node_pointer p,int j,int k){
+// Delete the particular nodes which are located in specified position  
+void node_delete(node_pointer p,int j,int k){
     int l = 1;
     node_pointer r;
     node_pointer q;
@@ -72,6 +93,33 @@ node_pointer node_delete(node_pointer p,int j,int k){
     }  
     r->Rp = p;
 }
+
+int node_length(node_pointer p){
+    int length = 0;
+    while(p->Rp != NULL){
+        length++;
+        p = p->Rp;
+    }
+    return(length);
+}
+
+//
+void node_merge(node_pointer p){
+    node_pointer q; 
+    while(p->Rp != NULL){
+        q = p;
+        while(q->Rp != NULL){
+            if(q->Rp->text == p->text){
+                q->Rp = q->Rp->Rp;
+            }
+            else{
+                q = q->Rp;
+            }
+        }
+        if(p->Rp != NULL)p = p->Rp;
+    }
+}
+
 
 // SeqList_Create initialization
 SeqList SeqList_Create(int m){
@@ -127,6 +175,8 @@ void SeqList_Delete(SeqList list,char x){ //查找所有等于x的值并删除
     }
 }
 
+#define flag '0'
+
 int main(){
     switch (flag)
     {//case '1'  '2'  represent the 
@@ -150,14 +200,26 @@ int main(){
 
     case '3':{
         node_pointer p;
-        node_pointer list3 = node_create(n);
+        node_pointer list3 = node_create();
         node_read(list3);
         node_delete(list3,1,3);// From the first node delete to  the third node.
         node_read(list3);
     }
-    case '4':
+    case '4':{
+        node_pointer list4 = node_create();
+        node_read(list4);
+        node_merge(list4);
+        node_read(list4);
         break;
     }
-    
+    case '0':{
+        char word[] = "aabbaabbbaaababbaaaerhjfklawkerhfajkwelfabbah.f/./../.@#$$*&^%&*^%*^&&*(^&^$&^%$$%^$*^(&^(*&%&*(%*^$&#%^jfffdjkalwkjdfkabbaaababbaaababbaaabab";
+        node_pointer p = node_generator(sizeof(word), word);
+        node_read(p);
+        node_merge(p);
+        node_read(p);
+        //printf('6');
+    }
+    }
     return 0;
 }
