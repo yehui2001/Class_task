@@ -96,7 +96,7 @@ goods_pointer Add_goods(int flag,goods_pointer p){
             r = p;
             p = p->next;            
         }
-        //  p->Name = Name;
+        ///  p->Name = Name;
         //  p->No = No;
         //  p->Num = Num;
         //  p->next = NULL;
