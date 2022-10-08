@@ -31,10 +31,10 @@ node_pointer node_create(){
     q = header;
     //q->text = text; //无头节点需要注释此处
     q->Rp = NULL;
-    for(i = 0; i <=iter; i++){
+    for(i = 0; i <=iter-1; i++){
         p = (node_pointer)malloc(sizeof(node_pointer));
-        if(i%3 ==0){text++;}
         p->text = text;
+        text++;
         p->Rp = NULL;
         q->Rp = p;
         q = p;
@@ -42,6 +42,7 @@ node_pointer node_create(){
     return header;
 }
 
+//DIY scanf
 node_pointer node_generator(int length, char word[]){
     char *word_pointer = word;
     node_pointer header,p,q;
@@ -49,7 +50,7 @@ node_pointer node_generator(int length, char word[]){
     q = header;
     //q->text = text; //无头节点需要注释此处
     q->Rp = NULL;
-    for(int i = 0; i <=length; i++){
+    for(int i = 0; i <=length-1; i++){
         p = (node_pointer)malloc(sizeof(node_pointer));
         //if(i%3 ==0){text++;}
         p->text = *word++;
@@ -103,7 +104,7 @@ int node_length(node_pointer p){
     return(length);
 }
 
-//
+//Delete the same text and reserve only one
 void node_merge(node_pointer p){
     node_pointer q; 
     while(p->Rp != NULL){
@@ -118,6 +119,34 @@ void node_merge(node_pointer p){
         }
         if(p->Rp != NULL)p = p->Rp;
     }
+}
+
+node_pointer node_mix(node_pointer p1,node_pointer p2){
+    node_pointer q = p1,p3,p4;
+    if(node_length(p1)<=node_length(p2)){
+        printf("Yes");
+        p1 = p1->Rp;
+        p2 = p2->Rp;
+        printf("%d",node_length(p1));
+        for(int i = 0; i<12/*node_length(p1)*/; i++){
+        p3 =p1->Rp;
+        p4 =p2->Rp;
+        printf("%c",p1->text);   
+        p1->Rp = p2;
+        //printf("%c",p1->Rp->text);   
+        // printf("%c",p3->text);
+        // printf("%c",p2->text);                
+        p2->Rp = p3->Rp;
+        //printf("%c",p2->Rp->text);
+        p3->Rp = p2->Rp;
+        p3->Rp->Rp = p4;
+        }
+        // for(i;i<=node_length(p2),i++)
+        // {p1->Rp=p2;
+        // p2->Rp=p2;}
+    }
+    printf("啊对对 \n");
+    return q;
 }
 
 
@@ -174,8 +203,8 @@ void SeqList_Delete(SeqList list,char x){ //查找所有等于x的值并删除
         }
     }
 }
-
-#define flag '0'
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#define flag '3'
 
 int main(){
     switch (flag)
@@ -199,10 +228,9 @@ int main(){
     }
 
     case '3':{
-        node_pointer p;
         node_pointer list3 = node_create();
         node_read(list3);
-        node_delete(list3,1,3);// From the first node delete to  the third node.
+        node_delete(list3,2,24);// From the first node delete to  the third node.
         node_read(list3);
     }
     case '4':{
@@ -213,13 +241,22 @@ int main(){
         break;
     }
     case '0':{
-        char word[] = "aabbaabbbaaababbaaaerhjfklawkerhfajkwelfabbah.f/./../.@#$$*&^%&*^%*^&&*(^&^$&^%$$%^$*^(&^(*&%&*(%*^$&#%^jfffdjkalwkjdfkabbaaababbaaababbaaabab";
+        char word[] = "aabbaabbbaaababbaaaerffdjkalwkjdfkabbaaababbaaababbaaabab";
         node_pointer p = node_generator(sizeof(word), word);
         node_read(p);
         node_merge(p);
         node_read(p);
-        //printf('6');
     }
+    case '5':{
+        char word1[] = "11111111";
+        node_pointer p1 = node_generator(sizeof(word1), word1);
+        node_read(p1);
+        char word2[] = "222222222222";
+        node_pointer p2 = node_generator(sizeof(word2), word2);
+        node_read(p2);
+        node_pointer p3 =node_mix(p1,p2);
+        node_read(p3);
     }
     return 0;
+    }
 }
