@@ -102,7 +102,7 @@ goods_pointer Add_goods(int flag,goods_pointer p){
         //  p->next = NULL;
         
         r->next->next->next->Name = Name;
-        printf("%c",r->next->next->next->Name);
+        printf("%c",r->next->Name);
         // p->next->next->Name = Name;
         // p->next->next->No = No;
         // p->next->next->Num = Num;
