@@ -175,7 +175,7 @@ void SeqList_Delete(SeqList list,char x){ //查找所有等于x的值并删除
     }
 }
 
-#define flag '0'
+#define flag '1'
 
 int main(){
     switch (flag)
