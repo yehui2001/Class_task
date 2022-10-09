@@ -26,6 +26,7 @@ SeqList goods_Create(){
         Name++;
         shop->data[i].No = No;
         No++;
+        //printf("%d",shop->data[i].No);
         shop->data[i].Num = Num;
         Num++;
         shop->length = ++length;
@@ -36,13 +37,12 @@ SeqList goods_Create(){
 void SeqList_read(SeqList shop){
     for(int i = 0;i < N; i++) 
     {
-        printf("%c",shop->data[i].Name);
+        //printf("%c",shop->data[i].Name);
         printf("%d",shop->data[i].No);
-        printf("%d",shop->data[i].Num);
+        //printf("%d",shop->data[i].Num);
         printf("\n");
     }
 }
-
 
 int main()
 {
