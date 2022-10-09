@@ -1,11 +1,11 @@
 #include<stdio.h>
-#define N 10 //¼ÙÉèÉÌµêÀïÓĞ10¼şÉÌÆ·
+#define N 10 //ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½10ï¿½ï¿½ï¿½ï¿½Æ·
 
 typedef struct goods{
     char Name;
     int No;
     int Num;  
-}*Seqlist;
+} *Seqlist;
 
 Seqlist goods_Create(){
     char Name = 'a';

@@ -84,32 +84,31 @@ goods_pointer Add_goods(int flag,goods_pointer p){
     char Name;
     int No;
     int Num;
-    scanf("%c",&Name);
-    scanf("%d",&No);
-    scanf("%d",&Num);
     goods_pointer q = p;
     switch (flag)
     {
     case 1:/*新商品入库*/
-        while(p->next->next!=NULL){
+        printf("Please input a good not existed in the warehouse\n");
+        scanf("%c",&Name);
+        scanf("%d",&No);
+        scanf("%d",&Num);
+        while(p->next!=NULL){
             //r = p;
             p = p->next;            
-        }
-        //  p->Name = Name;
-        //  p->No = No;
-        //  p->Num = Num;
-        //  p->next = NULL;
-        
-        printf("%c",p->next->Name);
-        p->next->next=(goods_pointer)malloc(sizeof(goods_pointer));
-        p->next->next->Name = Name;
-        p->next->next->No = No;
-        p->next->next->Num = Num;
-        p->next->next->next = NULL;
+        }  
+        p->next=(goods_pointer)malloc(sizeof(goods_pointer));
+        p->next->Name = Name;
+        p->next->No = No;
+        p->next->Num = Num;
+        p->next->next = NULL;
         return q;
         break;
     case 2:/*旧商品入库*/   //以名字入库
-        while(p->Name!=Name){
+        printf("Please input a good existed in the warehouse");
+        scanf("%c",&Name);
+        scanf("%d",&No);
+        scanf("%d",&Num);
+        while(p->Name!=Name &&p->next!=NULL){
             p = p->next;
         }
         p->Num = p->Num + Num;
@@ -120,35 +119,31 @@ goods_pointer Add_goods(int flag,goods_pointer p){
 
 goods_pointer Out_goods(goods_pointer p){
     goods_pointer q = p;
-    char Name = 'b';
+    char Name;
     int No;
-    int Num = 20;
+    int Num;
     printf("please input the out goods information \n");
-    scanf("Good_name=%c",&Name);
-    scanf("Good_no=%d",&No);
-    scanf("Good_num=%d",&Num);
-    while(p->Name!=Name){
+    scanf("%c",&Name);
+    scanf("%d",&No);
+    scanf("%d",&Num);
+    while(p->Name!= Name){
         p = p->next;
     }
     p->Num = p->Num - Num;
-    if(p->Num<=0){
-        
-    }
     return q;
 }
 
 goods_pointer Delete_goods(goods_pointer p){
     goods_pointer q = p,r;
-    char Name = 'a';
-    int No = 1;
-    int Num = 10;
-    printf("please input the Delete goods information \n");
-        // scanf("Good_name=%c",&Name);
-        // scanf("Good_no=%d",&No);
-        // scanf("Good_num=%d",&Num);
-    while(p->next->Name != Name){
+    char Name;
+    int No;
+    int Num ;
+    printf("please input the Delete goods name \n");
+    scanf("%c",&Name);
+    while(p->next->Name!=Name && p->next!=NULL){
         p = p->next;
     }
+    printf("%c",p->Name);
     p->next  = p->next->next;
     return q;
 }
@@ -161,8 +156,8 @@ int main()
     goods_pointer p = Create_goods_warehouse();
     goods_read(p);
     //Find_goods_inventory(1,p);//查询商品库存，1为用名字查询，2为用编号查询
-    //goods_read(Add_goods(2,p));
+    goods_read(Add_goods(1,p));
     //goods_read(Out_goods(p));
-    goods_read(Delete_goods(p));
+    //goods_read(Delete_goods(p));
     return 0;
 }
