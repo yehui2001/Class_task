@@ -1,47 +1,44 @@
 #include<stdio.h>
+#include<stdlib.h>
 #define N 10 
 
-typedef struct good{
+typedef struct{
     char Name;
     int No;
     int Num;  
-}good;
+}goods;
 
 typedef struct Seqlist_shop{
-    good *elem;
+    goods data[N];
     int length;
 }*SeqList;
 
 
-SeqList goods_Create(SeqList shop){
+SeqList goods_Create(){
+    SeqList shop;
+    shop = (SeqList)malloc(sizeof(SeqList));
     char Name = 'a';
     int No = 1;
     int Num = 10;
-    good goods[N];
-    for(int i = 0;i < N;i++){
-        goods[i].Name = Name;
-        Name++;
-        goods[i].No = No;
-        No++;
-        goods[i].Num = Num;
-        Num++;
-    }
-    shop = (SeqList)malloc(sizeof(SeqList)); 
-    shop->elem = (good *)malloc(sizeof(good) * N); 
     int length = 0;
-    for(int i=0; i < N; i++){
-        shop->elem[i] = goods[i];
+    for(int i = 0;i < N;i++){
+        shop->data[i].Name = Name;
+        Name++;
+        shop->data[i].No = No;
+        No++;
+        shop->data[i].Num = Num;
+        Num++;
         shop->length = ++length;
     }
     return shop;
 }
 
-void SeqList_read(SeqList p){
-    for(int i = 0;i < 1;i++) 
+void SeqList_read(SeqList shop){
+    for(int i = 0;i < N; i++) 
     {
-        printf("%c",p->elem[i].Name);
-        printf("%d",p->elem[i].No);
-        printf("%d",p->elem[i].Num);
+        printf("%c",shop->data[i].Name);
+        printf("%d",shop->data[i].No);
+        printf("%d",shop->data[i].Num);
         printf("\n");
     }
 }
@@ -49,8 +46,7 @@ void SeqList_read(SeqList p){
 
 int main()
 {
-    SeqList shop;
-    goods_Create(shop);
+    SeqList shop = goods_Create();
     SeqList_read(shop);
     return 0;
 }

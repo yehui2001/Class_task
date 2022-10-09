@@ -18,12 +18,12 @@ goods_pointer Create_goods_warehouse(){
     char Name = 'a';
     int Num = 10;
     goods_pointer header,p,q;
-    header = (goods_pointer)malloc(sizeof(goods_pointer));
+    q = (goods_pointer)malloc(sizeof(goods_pointer));
     // header->Name =Name;
     // header->No = No;
     // header->Num = Num;
     // header->next = NULL;
-    q = header;
+    header = q;
     for (int i = 1;i <= N; i++ ){
         p = (goods_pointer)malloc(sizeof(goods_pointer));
         p->Num = Num; 
