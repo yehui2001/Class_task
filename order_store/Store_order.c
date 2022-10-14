@@ -52,6 +52,7 @@ void SeqList_Find(SeqList shop,int flag){
     {
         char name;
         getchar();
+        printf("输入你想要查找商品的名称:");
         scanf("%c",&name);
         int i = 0;
         while(shop->data[i].Name != name && i != N){
@@ -66,6 +67,7 @@ void SeqList_Find(SeqList shop,int flag){
     case 2:
     {
         int no;
+        printf("输入你想要查找商品的编号");
         scanf("%d",&no);
         int i = 0;
         while(shop->data[i].No != no && i != N){
@@ -87,6 +89,7 @@ SeqList SeqList_add(SeqList shop,int flag){
     char name;
     int no;
     int num;
+    printf("输入你想要添加商品的信息:");
     scanf("%c",&name);
     scanf("%d",&no);
     scanf("%d",&num);
@@ -113,10 +116,15 @@ SeqList SeqList_add(SeqList shop,int flag){
 }
 
 SeqList SeqList_out(SeqList shop){
-    char name = 'a';
-     int no = 2;
-     int num = 2;
-      int i=0;
+    char name;
+    int no;
+    int num;
+    int i=0;
+    getchar();
+    printf("输入出库的信息:");
+    scanf("%c",&name);
+    scanf("%d",&no);
+    scanf("%d",&num);
     while (shop->data[i].Name!= name)
     {
         i++;
@@ -128,6 +136,7 @@ SeqList SeqList_out(SeqList shop){
 SeqList SeqList_delete(SeqList shop){
     char name;
     getchar();
+    printf("输入你想删除的商品名称:");
     scanf("%c",&name);
     goods temp;
     int i=0,j;

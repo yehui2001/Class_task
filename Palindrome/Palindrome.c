@@ -134,6 +134,7 @@ int main()
         }
         printf("\n");
 
+
         int k = 0;
         int exit = 1;
         while(exit){
