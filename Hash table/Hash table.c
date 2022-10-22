@@ -27,6 +27,9 @@ table_pointer table_init(table *t){
     t = (table_pointer)malloc(sizeof(table));
     //t->elem =(link_pointer)malloc(sizeof(link) * maxsize);
     t->length = 0;
+    for(int i = 0;i< maxsize;i++){
+        t->elem[i].data = 0;//默认置零值，指单链表中未插入任何值
+    }
     return t;
 }
 
@@ -36,39 +39,35 @@ void Hash(table *t,int *num){
     for(int i = 0; i < maxsize; i++){
         int temp = num[i]%13;
         if(t->elem[temp].data == 0){
-            temp = num[i]%13;
-            //t->elem[temp].next->data = 6;没有分配上空间
-            //t->elem[temp].next = NULL;
             q = (link_pointer)malloc(sizeof(link));
             q->data = num[i];
             q->next = NULL;
-            t->elem[temp].data = num[i];
-            // p->next = NULL;
-            // q->next = p;
-            // q = p;
-            t->length++;
+            t->elem[temp].next = q;
+            t->length++;//线性表的长度
+            t->elem[temp].data++;//代表该单链表中插入值的个数
         }
         else{
-            //t->elem[temp].next = (link_pointer)malloc(sizeof(link));
-            //p = t->elem[temp].next;
-            //t->elem[temp].data = num[i];
+            p = &(t->elem[temp]);
+            while(p->next != NULL){
+                p = p->next;
+            }
             q = (link_pointer)malloc(sizeof(link));
             q->data = num[i];
             q->next = NULL;
-
-            t->elem[temp].next = q;
+            p->next = q;
+            t->elem[temp].data++;//代表该单链表中插入值的个数
         }
     }
     printf("Hash successed");
 }
 
 /*读取表中内容*/
-
+//建议采用调试查看
 int main()
 {
     table t;
     table *T = table_init(&t);
-    int num[13] = {14,27,40,3,4,27,14,7,8,9,10,11,12};
+    int num[13] = {14,27,13,3,4,27,14,7,8,9,10,11,12};
     Hash(T,num);
     return  0;
 }
