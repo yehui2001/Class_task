@@ -41,8 +41,8 @@ score bi_sort(score myscore);     //二分排序
 node array2node(score myscore);   //顺序表转链表
 void print_node(node head);       //打印链表
 node table_sort(score myscore);   //表插法
-score pop_sort(score myscore); //冒泡排序
-score choose_sort(score myscore);//直接选择排序
+score pop_sort(score myscore);    //冒泡排序
+score choose_sort(score myscore); //直接选择排序
 ////////////////////
 
 //分隔符
@@ -207,20 +207,20 @@ score pop_sort(score myscore)
 {
     bowowa();
     printf("冒泡排序\n");
-    score sort =  help_list(myscore);
-    for(int i = 0;i < sort->len;i++)
+    score sort = help_list(myscore);
+    for (int i = 0; i < sort->len; i++)
     {
         int min_index = i;
-        for(int j = i+1;j < sort->len ;j++)
+        for (int j = i + 1; j < sort->len; j++)
         {
-            if(sort->array[j]<=sort->array[min_index])
+            if (sort->array[j] <= sort->array[min_index])
             {
-                min_index = j;//记录更新目前最小值的下标
+                min_index = j; //记录更新目前最小值的下标
                 print_score(sort);
             }
         }
         int temp = sort->array[i];
-        sort->array[i] = sort->array[min_index];//交换原始最小值与目前最小值
+        sort->array[i] = sort->array[min_index]; //交换原始最小值与目前最小值
         sort->array[min_index] = temp;
     }
     return sort;
@@ -232,12 +232,12 @@ score choose_sort(score myscore)
     bowowa();
     printf("直接选择排序\n");
     score sort = help_list(myscore);
-    for(int i = 0; i<sort->len; i++)
+    for (int i = 0; i < sort->len; i++)
     {
         int min_index = i;
-        for(int j = i+1; j<sort->len; j++)
+        for (int j = i + 1; j < sort->len; j++)
         {
-            if(sort->array[j] < sort->array[min_index])
+            if (sort->array[j] < sort->array[min_index])
             {
                 min_index = j;
                 print_score(sort);
@@ -257,7 +257,7 @@ int main(void)
     print_score(myscore);
     score direct = direct_sort(myscore);
     score bi = bi_sort(myscore);
-    score table = table_sort(myscore);
+    //score table = table_sort(myscore);
     score pop = pop_sort(myscore);
     score choose = choose_sort(myscore);
     bowowa();
