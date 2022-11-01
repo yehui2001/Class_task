@@ -182,22 +182,18 @@ score quick_sort(score myscore,int l ,int r)//l代表数组下标左值,r代表�
     print_score(sort);
     int i,j,temp;
     i = l; j = r; temp = sort->array[i];
+    if(l>=r)return 0;//此处很重要
     while(i != j){
-        while(i < j && sort->array[j] > temp)//查找比temp更小的数
+        while(i < j && sort->array[j] >= temp)//查找比temp更小的数
             j--;
-        while(i < j && sort->array[i] < temp)
+        if(i<j) sort->array[i++] = sort->array[j];
+        while(i < j && sort->array[i] <= temp)
             i++;
-        if(i < j)
-        {
-            int t = sort->array[i];
-            sort->array[i] = sort->array[j];
-            sort->array[j] = t;
-        }
+        if(i<j) sort->array[j--] = sort->array[i];
     }
     sort->array[i] = temp;
     quick_sort(sort,l,i-1);
     quick_sort(sort,i+1,r);
-    return sort;
 }
 
 
@@ -210,6 +206,7 @@ int main(void)
     score bi = bi_sort(myscore);
     score pop = pop_sort(myscore);
     score choose = choose_sort(myscore);
+    printf("快速排序\n");
     score quick = quick_sort(myscore,0,19);
     print_score(quick);
     getchar();
