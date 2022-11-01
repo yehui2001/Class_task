@@ -43,6 +43,7 @@ void print_node(node head);       //打印链表
 node table_sort(score myscore);   //表插法
 score pop_sort(score myscore);    //冒泡排序
 score choose_sort(score myscore); //直接选择排序
+score quick_sort(score myscore,int l ,int r); //快速选择排序
 ////////////////////
 
 //分隔符
@@ -301,6 +302,9 @@ int main(void)
     node table = table_sort(myscore);
     score pop = pop_sort(myscore);
     score choose = choose_sort(myscore);
+    bowowa();
+    printf("快速排序\n");
+    score quick = quick_sort(myscore,0,19);
     bowowa();
     getchar();
 }
