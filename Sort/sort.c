@@ -39,7 +39,8 @@ void print_score(score myscore);  //打印成绩单
 score direct_sort(score myscore); //直接插入排序
 score bi_sort(score myscore);     //二分排序
 node array2node(score myscore);   //顺序表转链表
-node table_sort(score myscore);  //表插法
+void print_node(node head);       //打印链表
+node table_sort(score myscore);   //表插法
 ////////////////////
 
 //分隔符
@@ -171,11 +172,12 @@ node array2node(score myscore)
 void print_node(node head)
 {
     printf("|||>>>");
-    while(head->next!=NULL){
-        printf(" %d -",head->key);
+    while (head->next != NULL)
+    {
+        printf(" %d -", head->key);
         head = head->next;
     }
-    printf(" %d ",head->key);
+    printf(" %d ", head->key);
     printf("<<<|||\n");
 }
 
@@ -184,8 +186,17 @@ node table_sort(score myscore)
 {
     bowowa();
     printf("表插法\n");
-    node head = array2node(myscore);
-    
+    node head, now, pre;
+    head = array2node(myscore);
+    pre = head;
+    now = pre->next;
+    if (now == NULL)
+    {
+        return head;
+    }
+    while (now != NULL)
+    {
+    }
     return head;
 }
 
