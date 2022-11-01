@@ -145,6 +145,7 @@ score pop_sort(score myscore)
         sort->array[i] = sort->array[min_index];//交换原始最小值与目前最小值
         sort->array[min_index] = temp;
     }
+    return sort;
 }
 
 //直接选择
@@ -168,15 +169,35 @@ score choose_sort(score myscore)
         sort->array[i] = sort->array[min_index];
         sort->array[min_index] = temp;
     }
+    return sort;
 }
 
 
-//快速选择
-score quick_sort(score myscore)
+//快速选择 整体采取从两边向内收敛,依次将比temp值大或者小的数分居两侧
+score quick_sort(score myscore,int l ,int r)//l代表数组下标左值,r代表数组下标右值
 {
     bowowa();
-    printf("快速选择排序\n");
-    score sort = help_list(myscore);
+    //score sort = help_list(myscore);
+    score sort = myscore;
+    print_score(sort);
+    int i,j,temp;
+    i = l; j = r; temp = sort->array[i];
+    while(i != j){
+        while(i < j && sort->array[j] > temp)//查找比temp更小的数
+            j--;
+        while(i < j && sort->array[i] < temp)
+            i++;
+        if(i < j)
+        {
+            int t = sort->array[i];
+            sort->array[i] = sort->array[j];
+            sort->array[j] = t;
+        }
+    }
+    sort->array[i] = temp;
+    quick_sort(sort,l,i-1);
+    quick_sort(sort,i+1,r);
+    return sort;
 }
 
 
@@ -189,5 +210,7 @@ int main(void)
     score bi = bi_sort(myscore);
     score pop = pop_sort(myscore);
     score choose = choose_sort(myscore);
+    score quick = quick_sort(myscore,0,19);
+    print_score(quick);
     getchar();
 }
