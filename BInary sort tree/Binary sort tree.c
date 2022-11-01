@@ -43,7 +43,7 @@ int main()
     node *p;
     int data[] = {10,20,3,230,233,13,20,41,141,0};
     int x,i = 0;
-    while(i!=5){
+    while(i!=10){
         x = data[i];
         p = insert_node(p,x);
         i++;
