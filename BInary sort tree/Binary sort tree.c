@@ -46,12 +46,12 @@ node_pointer search_node(node *p,int x){
     }
     else{
         if(p->data < x){
-            p->right = search_node(p->right,x);
-            return p->right;
+            printf("Right->");
+            return search_node(p->right,x);
         }
         else{
-            p->left = search_node(p->left,x);
-            return p->left;
+            printf("Left->");
+            return search_node(p->left,x);
         }
     }
 }
@@ -67,8 +67,11 @@ int main()
         p = insert_node(p,x);
         i++;
     }
-    int y = 141;
+
+    int y;
+    printf("请输入想查询的值:");
+    scanf("%d",&y);
     q = search_node(p,y);
-    printf("查询到的值为%d \n",q->data);
+    printf("\n查询到的值为:%d \n",q->data);
     return 0;
 }
