@@ -13,7 +13,7 @@ typedef struct score_list
 //函数列表
 void bowowa();                    //分隔符
 score rand_score(int size);       //生成随机成绩单
-score help_list(score myscore);        //生成辅助数组
+score help_list(score myscore);   //生成辅助数组
 void print_score(score myscore);  //打印成绩单
 score direct_sort(score myscore); //直接插入排序
 score bi_sort(score myscore);     //二分排序
@@ -124,6 +124,62 @@ score bi_sort(score myscore)
     return sort;
 }
 
+//冒泡排序
+score pop_sort(score myscore)
+{
+    bowowa();
+    printf("冒泡排序\n");
+    score sort =  help_list(myscore);
+    for(int i = 0;i < sort->len;i++)
+    {
+        print_score(sort);
+        int min_index = i;
+        for(int j = i+1;j < sort->len ;j++)
+        {
+            if(sort->array[j]<=sort->array[min_index])
+            {
+                min_index = j;//记录更新目前最小值的下标
+            }
+        }
+        int temp = sort->array[i];
+        sort->array[i] = sort->array[min_index];//交换原始最小值与目前最小值
+        sort->array[min_index] = temp;
+    }
+}
+
+//直接选择
+score choose_sort(score myscore)
+{
+    bowowa();
+    printf("直接选择排序\n");
+    score sort = help_list(myscore);
+    for(int i = 0; i<sort->len; i++)
+    {
+        print_score(sort);
+        int min_index = i;
+        for(int j = i+1; j<sort->len; j++)
+        {
+            if(sort->array[j] < sort->array[min_index])
+            {
+                min_index = j;
+            }
+        }
+        int temp = sort->array[i];
+        sort->array[i] = sort->array[min_index];
+        sort->array[min_index] = temp;
+    }
+}
+
+
+//快速选择
+score quick_sort(score myscore)
+{
+    bowowa();
+    printf("快速选择排序\n");
+    score sort = help_list(myscore);
+}
+
+
 int main(void)
 {
     bowowa();
@@ -131,5 +187,7 @@ int main(void)
     print_score(myscore);
     score direct = direct_sort(myscore);
     score bi = bi_sort(myscore);
+    score pop = pop_sort(myscore);
+    score choose = choose_sort(myscore);
     getchar();
 }
