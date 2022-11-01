@@ -1,33 +1,36 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 #define maxsize 100
-#define N 10 
+#define N 10
 
-typedef struct{
+typedef struct
+{
     char Name;
     int No;
-    int Num;  
-}goods;
+    int Num;
+} goods;
 
-typedef struct Seqlist_shop{
+typedef struct Seqlist_shop
+{
     goods data[maxsize];
     int length;
-}*SeqList;
+} * SeqList;
 
-
-SeqList goods_Create(){
+SeqList goods_Create()
+{
     SeqList shop;
     shop = (SeqList)malloc(sizeof(SeqList));
     char Name = 'a';
     int No = 1;
     int Num = 10;
     int length = 0;
-    for(int i = 0;i < N;i++){
+    for (int i = 0; i < N; i++)
+    {
         shop->data[i].Name = Name;
         Name++;
         shop->data[i].No = No;
         No++;
-        //printf("%d",shop->data[i].No);
+        // printf("%d",shop->data[i].No);
         shop->data[i].Num = Num;
         Num++;
         shop->length = ++length;
@@ -35,17 +38,19 @@ SeqList goods_Create(){
     return shop;
 }
 
-void SeqList_read(SeqList shop){
-    for(int i = 0;i < shop->length; i++) 
+void SeqList_read(SeqList shop)
+{
+    for (int i = 0; i < shop->length; i++)
     {
-        printf("Name = %c,",shop->data[i].Name);
-        printf("No = %d,",shop->data[i].No);
-        printf("Num = %d",shop->data[i].Num);
+        printf("Name = %c,", shop->data[i].Name);
+        printf("No = %d,", shop->data[i].No);
+        printf("Num = %d", shop->data[i].Num);
         printf("\n");
     }
 }
 
-void SeqList_Find(SeqList shop,int flag){
+void SeqList_Find(SeqList shop, int flag)
+{
     switch (flag)
     {
     case 1:
@@ -53,100 +58,105 @@ void SeqList_Find(SeqList shop,int flag){
         char name;
         getchar();
         printf("输入你想要查找商品的名称:");
-        scanf("%c",&name);
+        scanf("%c", &name);
         int i = 0;
-        while(shop->data[i].Name != name && i != N){
+        while (shop->data[i].Name != name && i != N)
+        {
             i++;
         }
-        printf("Name = %c,",shop->data[i].Name);
-        printf("No = %d,",shop->data[i].No);
-        printf("Num = %d,",shop->data[i].Num);
+        printf("Name = %c,", shop->data[i].Name);
+        printf("No = %d,", shop->data[i].No);
+        printf("Num = %d,", shop->data[i].Num);
         printf("\n");
         break;
-    }   
+    }
     case 2:
     {
         int no;
         printf("输入你想要查找商品的编号");
-        scanf("%d",&no);
+        scanf("%d", &no);
         int i = 0;
-        while(shop->data[i].No != no && i != N){
-        i++;
+        while (shop->data[i].No != no && i != N)
+        {
+            i++;
         }
-        printf("Name = %c,",shop->data[i].Name);
-        printf("No = %d,",shop->data[i].No);
-        printf("Num = %d",shop->data[i].No);
+        printf("Name = %c,", shop->data[i].Name);
+        printf("No = %d,", shop->data[i].No);
+        printf("Num = %d", shop->data[i].No);
         break;
     }
     default:
-    break;
+        break;
     }
-
 }
 
-SeqList SeqList_add(SeqList shop,int flag){
+SeqList SeqList_add(SeqList shop, int flag)
+{
     getchar();
     char name;
     int no;
     int num;
     printf("输入你想要添加商品的信息:");
-    scanf("%c",&name);
-    scanf("%d",&no);
-    scanf("%d",&num);
+    scanf("%c", &name);
+    scanf("%d", &no);
+    scanf("%d", &num);
     switch (flag)
     {
-    case 1:/*新商品入库*/
+    case 1: /*新商品入库*/
         shop->data[shop->length].Name = name;
         shop->data[shop->length].No = no;
         shop->data[shop->length].Num = num;
         shop->length++;
-    return shop;
+        return shop;
         break;
-    
-    case 2:/*旧商品入库*/
-    int i=0;
-    while (shop->data[i].Name!= name)
-    {
-        i++;
-    }
-    shop->data[i].Num += num;
-    return shop;
-    break;
+
+    case 2: /*旧商品入库*/
+        int i = 0;
+        while (shop->data[i].Name != name)
+        {
+            i++;
+        }
+        shop->data[i].Num += num;
+        return shop;
+        break;
     }
 }
 
-SeqList SeqList_out(SeqList shop){
+SeqList SeqList_out(SeqList shop)
+{
     char name;
     int no;
     int num;
-    int i=0;
+    int i = 0;
     getchar();
     printf("输入出库的信息:");
-    scanf("%c",&name);
-    scanf("%d",&no);
-    scanf("%d",&num);
-    while (shop->data[i].Name!= name)
+    scanf("%c", &name);
+    scanf("%d", &no);
+    scanf("%d", &num);
+    while (shop->data[i].Name != name)
     {
         i++;
     }
     shop->data[i].Num -= num;
     return shop;
-    }  
+}
 
-SeqList SeqList_delete(SeqList shop){
+SeqList SeqList_delete(SeqList shop)
+{
     char name;
     getchar();
     printf("输入你想删除的商品名称:");
-    scanf("%c",&name);
+    scanf("%c", &name);
     goods temp;
-    int i=0,j;
-    while (shop->data[i].Name!= name)
+    int i = 0, j;
+    while (shop->data[i].Name != name)
     {
         i++;
     }
     shop->length--;
-    for(j = i;j< shop->length;j++){
-        shop->data[j] = shop->data[j+1]; 
+    for (j = i; j < shop->length; j++)
+    {
+        shop->data[j] = shop->data[j + 1];
     }
     return shop;
 }
@@ -165,7 +175,6 @@ void menu()
     printf("**********************************\n");
 }
 
-
 int main()
 {
     int exit = 1;
@@ -173,33 +182,33 @@ int main()
     char name;
     int no;
     int num;
-    char n='a';
+    char n = 'a';
     SeqList shop = goods_Create();
-    //SeqList_read(shop);
-    while(exit)
-{
-    menu();
-    printf("输入你的选择:");
-    scanf("%d",&option);
-    switch (option)
+    // SeqList_read(shop);
+    while (exit)
     {
+        menu();
+        printf("输入你的选择:");
+        scanf("%d", &option);
+        switch (option)
+        {
         case 1:
             printf("Created successfully \n");
             break;
         case 2:
             SeqList_read(shop);
-            break;  
+            break;
         case 3:
             int h;
             printf("\n 1代表用名称查找,2代表用编号查找\n");
-            scanf("%d",&h);
-            SeqList_Find(shop,h);
+            scanf("%d", &h);
+            SeqList_Find(shop, h);
             break;
         case 4:
             int y;
             printf("\n 1代表加入新商品,2代表加入旧商品 \n");
-            scanf("%d",&y);
-            SeqList_read(SeqList_add(shop,y));
+            scanf("%d", &y);
+            SeqList_read(SeqList_add(shop, y));
             break;
         case 5:
             SeqList_read(SeqList_out(shop));
@@ -210,7 +219,7 @@ int main()
             printf("Exit successfully");
             exit = 0;
             break;
+        }
     }
-}
-    return 0; 
+    return 0;
 }

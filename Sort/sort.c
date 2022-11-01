@@ -24,14 +24,22 @@ typedef struct score_list
     int len;
     int array[0];
 } * score;
+//成绩单链表
+typedef struct score_node
+{
+    int key;
+    struct score_node *next;
+} * node;
 ////////////////////
 //函数列表
 void bowowa();                    //分隔符
 score rand_score(int size);       //生成随机成绩单
-score help_list(score myscore);        //生成辅助数组
+score help_list(score myscore);   //生成辅助数组
 void print_score(score myscore);  //打印成绩单
 score direct_sort(score myscore); //直接插入排序
 score bi_sort(score myscore);     //二分排序
+node array2node(score myscore);   //顺序表转链表
+node table_sort(score myscore);  //表插法
 ////////////////////
 
 //分隔符
@@ -48,7 +56,7 @@ score rand_score(int size)
     list->len = size;
     for (int i = 0; i < size; i++)
     {
-        list->array[i] = rand() % 100 + 1; //生成1~100的随机数
+        list->array[i] = rand() % 51 + 50; //生成1~100的随机数
         // printf("%d\n",list->array[i]);
     }
     return list;
@@ -94,9 +102,9 @@ score direct_sort(score myscore)
         for (j = i - 1; tmp < sort->array[j] && j >= 0; j--)
         {
             sort->array[j + 1] = sort->array[j];
+            print_score(sort);
         }
         sort->array[j + 1] = tmp;
-        print_score(sort);
     }
     return sort;
 }
@@ -139,12 +147,55 @@ score bi_sort(score myscore)
     return sort;
 }
 
+//顺序表转链表
+node array2node(score myscore)
+{
+    int i;
+    node head, p, q;
+    head = (node)malloc(sizeof(node));
+    q = head;
+    q->key = myscore->array[0];
+    q->next = NULL;
+    for (i = 1; i < myscore->len; i++)
+    {
+        p = (node)malloc(sizeof(node));
+        p->key = myscore->array[i];
+        p->next = NULL;
+        q->next = p;
+        q = p;
+    }
+    return head;
+}
+
+//打印链表
+void print_node(node head)
+{
+    printf("|||>>>");
+    while(head->next!=NULL){
+        printf(" %d -",head->key);
+        head = head->next;
+    }
+    printf(" %d ",head->key);
+    printf("<<<|||\n");
+}
+
+//表插法
+node table_sort(score myscore)
+{
+    bowowa();
+    printf("表插法\n");
+    node head = array2node(myscore);
+    
+    return head;
+}
+
 int main(void)
 {
     bowowa();
-    score myscore = rand_score(20);
+    score myscore = rand_score(10);
     print_score(myscore);
     score direct = direct_sort(myscore);
     score bi = bi_sort(myscore);
+    score table = table_sort(myscore);
     getchar();
 }
