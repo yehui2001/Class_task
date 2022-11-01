@@ -176,7 +176,6 @@ score choose_sort(score myscore)
 //快速选择 整体采取从两边向内收敛,依次将比temp值大或者小的数分居两侧
 score quick_sort(score myscore,int l ,int r)//l代表数组下标左值,r代表数组下标右值
 {
-    bowowa();
     //score sort = help_list(myscore);
     score sort = myscore;
     print_score(sort);
@@ -207,7 +206,7 @@ int main(void)
     score pop = pop_sort(myscore);
     score choose = choose_sort(myscore);
     printf("快速排序\n");
+    bowowa();
     score quick = quick_sort(myscore,0,19);
-    print_score(quick);
     getchar();
 }
