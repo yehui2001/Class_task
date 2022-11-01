@@ -48,7 +48,7 @@ score choose_sort(score myscore); //直接选择排序
 //分隔符
 void bowowa()
 {
-    printf("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
+    printf("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
 }
 
 //生成随机成绩单
@@ -105,9 +105,9 @@ score direct_sort(score myscore)
         for (j = i - 1; tmp < sort->array[j] && j >= 0; j--)
         {
             sort->array[j + 1] = sort->array[j];
-            print_score(sort);
         }
         sort->array[j + 1] = tmp;
+        print_score(sort);
     }
     return sort;
 }
@@ -121,7 +121,6 @@ score bi_sort(score myscore)
     score sort = help_list(myscore);
     for (i = 1; i < sort->len; i++)
     {
-        print_score(sort);
         if (sort->array[i] < sort->array[i - 1])
         {
             tmp = sort->array[i];
@@ -260,12 +259,12 @@ score choose_sort(score myscore)
             if (sort->array[j] < sort->array[min_index])
             {
                 min_index = j;
-                print_score(sort);
             }
         }
         int temp = sort->array[i];
         sort->array[i] = sort->array[min_index];
         sort->array[min_index] = temp;
+        print_score(sort);
     }
     return sort;
 }
@@ -273,11 +272,11 @@ score choose_sort(score myscore)
 int main(void)
 {
     bowowa();
-    score myscore = rand_score(10);
+    score myscore = rand_score(20);
     print_score(myscore);
     score direct = direct_sort(myscore);
     score bi = bi_sort(myscore);
-    score table = table_sort(myscore);
+    node table = table_sort(myscore);
     score pop = pop_sort(myscore);
     score choose = choose_sort(myscore);
     bowowa();
