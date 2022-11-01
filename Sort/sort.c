@@ -200,6 +200,30 @@ node table_sort(score myscore)
     return head;
 }
 
+//冒泡排序
+score pop_sort(score myscore)
+{
+    bowowa();
+    printf("冒泡排序\n");
+    score sort =  help_list(myscore);
+    for(int i = 0;i < sort->len;i++)
+    {
+        print_score(sort);
+        int min_index = i;
+        for(int j = i+1;j < sort->len ;j++)
+        {
+            if(sort->array[j]<=sort->array[min_index])
+            {
+                min_index = j;//记录更新目前最小值的下标
+            }
+        }
+        int temp = sort->array[i];
+        sort->array[i] = sort->array[min_index];//交换原始最小值与目前最小值
+        sort->array[min_index] = temp;
+    }
+    return sort;
+}
+
 int main(void)
 {
     bowowa();
@@ -207,6 +231,7 @@ int main(void)
     print_score(myscore);
     score direct = direct_sort(myscore);
     score bi = bi_sort(myscore);
-    score table = table_sort(myscore);
+    //score table = table_sort(myscore);
+    score pop = pop_sort(myscore);
     getchar();
 }
