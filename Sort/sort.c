@@ -188,17 +188,37 @@ node table_sort(score myscore)
 {
     bowowa();
     printf("表插法\n");
-    node head, now, pre;
+    node ghost, head, now, pre, p, q;
     head = array2node(myscore);
+    ghost = (node)malloc(sizeof(node));
+    ghost->key = -1;
+    ghost->next = head;
     pre = head;
     now = pre->next;
-    if (now == NULL)
-    {
-        return head;
-    }
+    print_node(ghost->next);
     while (now != NULL)
     {
+        p = ghost;
+        q = p->next;
+        while (q != now && q->key <= now->key)
+        {
+            p = q;
+            q = q->next;
+        }
+        if (q == now)
+        {
+            pre = pre->next;
+            now = pre->next;
+            continue;
+        }
+        pre->next = now->next;
+        now->next = q;
+        p->next = now;
+        //if(pre==NULL)break;
+        now = pre->next;
+        print_node(ghost->next);
     }
+    print_node(ghost->next);
     return head;
 }
 
@@ -257,7 +277,7 @@ int main(void)
     print_score(myscore);
     score direct = direct_sort(myscore);
     score bi = bi_sort(myscore);
-    //score table = table_sort(myscore);
+    score table = table_sort(myscore);
     score pop = pop_sort(myscore);
     score choose = choose_sort(myscore);
     bowowa();
