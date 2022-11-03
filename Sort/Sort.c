@@ -193,6 +193,7 @@ score quick_sort(score myscore,int l ,int r)//l代表数组下标左值,r代表�
     sort->array[i] = temp;
     quick_sort(sort,l,i-1);
     quick_sort(sort,i+1,r);
+    return sort;
 }
 
 
