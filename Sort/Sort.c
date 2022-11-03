@@ -9,6 +9,12 @@ typedef struct score_list
     int len;
     int array[0];
 } * score;
+//成绩单链表
+typedef struct score_node
+{
+    int key;
+    struct score_node *next;
+} * node;
 ////////////////////
 //函数列表
 void bowowa();                    //分隔符
@@ -17,12 +23,17 @@ score help_list(score myscore);   //生成辅助数组
 void print_score(score myscore);  //打印成绩单
 score direct_sort(score myscore); //直接插入排序
 score bi_sort(score myscore);     //二分排序
+node array2node(score myscore);   //顺序表转链表
+void print_node(node head);       //打印链表
+node table_sort(score myscore);   //表插法
+score pop_sort(score myscore);    //冒泡排序
+score choose_sort(score myscore); //直接选择排序
 ////////////////////
 
 //分隔符
 void bowowa()
 {
-    printf("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
+    printf("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
 }
 
 //生成随机成绩单
@@ -33,7 +44,7 @@ score rand_score(int size)
     list->len = size;
     for (int i = 0; i < size; i++)
     {
-        list->array[i] = rand() % 100 + 1; //生成1~100的随机数
+        list->array[i] = rand() % 51 + 50; //生成1~100的随机数
         // printf("%d\n",list->array[i]);
     }
     return list;
@@ -95,7 +106,6 @@ score bi_sort(score myscore)
     score sort = help_list(myscore);
     for (i = 1; i < sort->len; i++)
     {
-        print_score(sort);
         if (sort->array[i] < sort->array[i - 1])
         {
             tmp = sort->array[i];
@@ -122,6 +132,78 @@ score bi_sort(score myscore)
         }
     }
     return sort;
+}
+
+//顺序表转链表
+node array2node(score myscore)
+{
+    int i;
+    node head, p, q;
+    head = (node)malloc(sizeof(node));
+    q = head;
+    q->key = myscore->array[0];
+    q->next = NULL;
+    for (i = 1; i < myscore->len; i++)
+    {
+        p = (node)malloc(sizeof(node));
+        p->key = myscore->array[i];
+        p->next = NULL;
+        q->next = p;
+        q = p;
+    }
+    return head;
+}
+
+//打印链表
+void print_node(node head)
+{
+    printf("|||>>>");
+    while (head->next != NULL)
+    {
+        printf(" %d -", head->key);
+        head = head->next;
+    }
+    printf(" %d ", head->key);
+    printf("<<<|||\n");
+}
+
+//表插法
+node table_sort(score myscore)
+{
+    bowowa();
+    printf("表插法\n");
+    node ghost, head, now, pre, p, q;
+    head = array2node(myscore);
+    ghost = (node)malloc(sizeof(node));
+    ghost->key = -1;
+    ghost->next = head;
+    pre = head;
+    now = pre->next;
+    print_node(ghost->next);
+    while (now != NULL)
+    {
+        p = ghost;
+        q = p->next;
+        while (q != now && q->key <= now->key)
+        {
+            p = q;
+            q = q->next;
+        }
+        if (q == now)
+        {
+            pre = pre->next;
+            now = pre->next;
+            continue;
+        }
+        pre->next = now->next;
+        now->next = q;
+        p->next = now;
+        //if(pre==NULL)break;
+        now = pre->next;
+        print_node(ghost->next);
+    }
+    print_node(ghost->next);
+    return head;
 }
 
 //冒泡排序
@@ -154,13 +236,12 @@ score choose_sort(score myscore)
     bowowa();
     printf("直接选择排序\n");
     score sort = help_list(myscore);
-    for(int i = 0; i<sort->len; i++)
+    for (int i = 0; i < sort->len; i++)
     {
-        print_score(sort);
         int min_index = i;
-        for(int j = i+1; j<sort->len; j++)
+        for (int j = i + 1; j < sort->len; j++)
         {
-            if(sort->array[j] < sort->array[min_index])
+            if (sort->array[j] < sort->array[min_index])
             {
                 min_index = j;
             }
@@ -168,10 +249,10 @@ score choose_sort(score myscore)
         int temp = sort->array[i];
         sort->array[i] = sort->array[min_index];
         sort->array[min_index] = temp;
+        print_score(sort);
     }
     return sort;
 }
-
 
 //快速选择 整体采取从两边向内收敛,依次将比temp值大或者小的数分居两侧
 score quick_sort(score myscore,int l ,int r)//l代表数组下标左值,r代表数组下标右值
@@ -193,9 +274,7 @@ score quick_sort(score myscore,int l ,int r)//l代表数组下标左值,r代表�
     sort->array[i] = temp;
     quick_sort(sort,l,i-1);
     quick_sort(sort,i+1,r);
-    return sort;
 }
-
 
 int main(void)
 {
@@ -204,9 +283,10 @@ int main(void)
     print_score(myscore);
     score direct = direct_sort(myscore);
     score bi = bi_sort(myscore);
+    node table = table_sort(myscore);
     score pop = pop_sort(myscore);
     score choose = choose_sort(myscore);
-    printf("快速排序\n");
+    printf("快速排序 \n");
     bowowa();
     score quick = quick_sort(myscore,0,19);
     getchar();
