@@ -206,17 +206,17 @@ node table_sort(score myscore)
     return head;
 }
 
-//冒泡排序
-score pop_sort(score myscore)
+//直接选择排序
+score choose_sort(score myscore)
 {
     bowowa();
-    printf("冒泡排序\n");
+    printf("直接选择排序\n");
     score sort =  help_list(myscore);
     for(int i = 0;i < sort->len;i++)
     {
         print_score(sort);
         int min_index = i;
-        for(int j = i+1;j < sort->len ;j++)
+        for(int j = i+1;j < sort->len;j++)
         {
             if(sort->array[j]<=sort->array[min_index])
             {
@@ -230,26 +230,25 @@ score pop_sort(score myscore)
     return sort;
 }
 
-//直接选择
-score choose_sort(score myscore)
+//冒泡排序
+score pop_sort(score myscore)
 {
     bowowa();
-    printf("直接选择排序\n");
+    printf("冒泡排序\n");
     score sort = help_list(myscore);
-    for (int i = 0; i < sort->len; i++)
+    for (int i = 0; i < sort->len-1; i++)
     {
-        int min_index = i;
-        for (int j = i + 1; j < sort->len; j++)
+        print_score(sort);
+        for (int j = 0; j < sort->len-i-1; j++)
         {
-            if (sort->array[j] < sort->array[min_index])
+            if (sort->array[j+1] < sort->array[j])//遇见比前一个小的交换，交换位置。
             {
-                min_index = j;
+                int temp;
+                temp = sort->array[j];
+                sort->array[j] = sort->array[j+1];
+                sort->array[j+1] = temp;
             }
         }
-        int temp = sort->array[i];
-        sort->array[i] = sort->array[min_index];
-        sort->array[min_index] = temp;
-        print_score(sort);
     }
     return sort;
 }
