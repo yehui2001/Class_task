@@ -3,5 +3,5 @@
 ## @author: **Lev1s** , **yehui**
 ## @data：2022.9.13
 # <div align='center'>
-# <img src="[1](https://assets-cdn.jable.tv/contents/videos_screenshots/28000/28645/320x180/1.jpg)" width="150%" >
+# <img src="https://assets-cdn.jable.tv/contents/videos_screenshots/28000/28645/320x180/1.jpg" width="150%" >
 # </div>
